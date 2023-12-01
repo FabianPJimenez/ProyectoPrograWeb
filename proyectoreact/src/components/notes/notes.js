@@ -37,7 +37,7 @@ const Notes = (props) => {
     });
   };
   const elimminarNote = () =>{
-    console.log(note.NoteID);
+    console.log(note.UserID);
     props.refrescar();
     axios
     .delete(`${urlDelApi}/notes/${note.NoteID}`, {
