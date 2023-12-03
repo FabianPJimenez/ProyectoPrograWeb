@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './registrar.css';
+import TextField  from '@mui/material/TextField';
+import Button  from '@mui/material/Button';
 import axios from 'axios';
 
 const Registrar = () => {
@@ -8,6 +10,7 @@ const Registrar = () => {
   const [formValues, setFormValues] = React.useState({
     Username: "",
     Password:"",
+    Email:"",
 
   });
 
@@ -25,7 +28,7 @@ const Registrar = () => {
       .post(`${urlDelApi}/users`, {
         Username: formValues.Username,
         Email: formValues.Email,
-        Password: formValues.Password1
+        Password: formValues.Password,
       })
       .then(function (response) {
         console.log(response);
@@ -46,9 +49,37 @@ const Registrar = () => {
 
 
   return(
+    
   <div className="registrar" data-testid="Registrar">
+ 
+    <TextField
+     id="outlined-basic"
+      name="Username"
+      label="Username"
+      // onChange={onChancheInput}
+      variant="standard"
+      onChange={onChange}
+    />
+    <TextField
+      id="outlined-basic"
+      name="Password"
+     label="Password"
+      // onChange={onChancheInput}
+      variant="standard"
+      onChange={onChange}
+    />
+    <TextField
+      id="outlined-basic"
+      name="Email"
+      label="Email"
+      // onChange={onChancheInput}
+      variant="standard"
+      onChange={onChange}
+    />
 
-
+ <Button color="secondary" variant="text" onClick={RegistrarUsuario}>
+      Registrar
+    </Button>
 
 
     

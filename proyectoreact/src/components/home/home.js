@@ -43,7 +43,8 @@ const Home = () => {
         // always executed
       });
   };
-  const postNote = (event) => {
+  const AgregarNote = (event) => {
+console.log("puto el que lo lea");
     axios
       .post(`${urlDelApi}/notes`,{
         UserID: 2,
@@ -51,6 +52,7 @@ const Home = () => {
         Content: addNote.Content,
       })
       .then(function (response) {
+        console.log(response);
         // handle success
         getNotes();
         
@@ -63,10 +65,30 @@ const Home = () => {
         // always executed
       });
   };
+
+      
   return (
   <div className="home" data-testid="Home">
-   
-   
+ <TextField
+     id="outlined-basic"
+      name="Title"
+      // label="Outlined"
+      // onChange={onChancheInput}
+      variant="standard"
+      onChange={onChange}
+    />
+     <TextField
+     id="outlined-basic"
+      name="Content"
+      // label="Outlined"
+      // onChange={onChancheInput}
+      variant="standard"
+      onChange={onChange}
+    />
+   <br></br>
+   <Button color="secondary" variant="text" onClick={AgregarNote}>
+      Agregar
+    </Button>
     <Card id="card-home" /*className={styles["card-home"]}*/>
         
 
