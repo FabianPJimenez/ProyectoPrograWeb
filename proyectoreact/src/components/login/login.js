@@ -14,14 +14,14 @@ const Login = () => {
   const [userAuth, setUserAuth] = React.useState();
   const navigate = useNavigate();
 
-  const urlDelApi = "http://localhost/dashboard/apiDB.php/records";
+  const urlDelApi = "https://2eeb-190-113-115-45.ngrok.io";
 
   const onChangeInput = (event) => {
     let name = event.target.name;
     let value = event.target.value;
     setUser({ ...user, [name]: value });
   };
-  const getUsers = () =>{
+  const ComprobarUsuarioLogin = () =>{
     axios
     .get(`${urlDelApi}/users`, {
       params: {
@@ -29,9 +29,12 @@ const Login = () => {
       }
     })
     .then(function (response) {
-      
-      console.log(response.data.records[0]);
-      setUserAuth(response.data.records[0]);
+      const users = response.data.records;
+      const usernameToFilter = user.username;
+      const filteredUsers = users.filter(user => user.Username === usernameToFilter);
+      const filteredUser = filteredUsers;
+      setUserAuth(filteredUser);
+     
      
       
     })

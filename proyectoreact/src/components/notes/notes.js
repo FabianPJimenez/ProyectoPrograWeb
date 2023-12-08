@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Notes = (props) => {
   const [note, setNote] = React.useState(props.note);
-  const urlDelApi = "http://localhost/dashboard/apiDB.php/records";
+  const urlDelApi = "https://2eeb-190-113-115-45.ngrok.io/inicio/listas";
 
 
   const onChange = (event) => {
