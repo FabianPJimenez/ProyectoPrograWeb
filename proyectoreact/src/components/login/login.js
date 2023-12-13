@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import TextField from '@mui/material/TextField';
 
 
 const Login = () => {
   const [user, setUser] = React.useState({
-    username: "",
-    password: "",
-  });
+    Nombre_Usuario: "",
+    ConstraseNa: "",
+ });
   const [userAuth, setUserAuth] = React.useState();
   const navigate = useNavigate();
 
-  const urlDelApi = "https://2eeb-190-113-115-45.ngrok.io";
+  const urlDelApi = "http://localhost:8080/inicio";
 
   const onChangeInput = (event) => {
     let name = event.target.name;
@@ -22,18 +22,17 @@ const Login = () => {
     setUser({ ...user, [name]: value });
   };
   const ComprobarUsuarioLogin = () =>{
+    
     axios
-    .get(`${urlDelApi}/users`, {
-      params: {
-        Username: user.username
+    .post(`${urlDelApi}?username=${user.Nombre_Usuario}&password=${user.ConstraseNa}`,null,{
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       }
-    })
+    }
+    )
     .then(function (response) {
-      const users = response.data.records;
-      const usernameToFilter = user.username;
-      const filteredUsers = users.filter(user => user.Username === usernameToFilter);
-      const filteredUser = filteredUsers;
-      setUserAuth(filteredUser);
+    console.log(response);
      
      
       
@@ -51,8 +50,12 @@ const Login = () => {
 
   return(
   <div className="login" data-testid="Login">
-   
-   
+    
+   <TextField id="outlined-basic" label="usuario" variant="outlined" name="Nombre_Usuario" value={user.Nombre_Usuario} onChange={onChangeInput}/>
+   <br></br>
+   <TextField id="outlined-basic" label="password" variant="outlined"  name="ContraseNa"  value={user.ConstraseNa} onChange={onChangeInput}/>
+   <br></br>
+   <button onClick={ComprobarUsuarioLogin}> prueba </button>
 
   </div>
 )};
